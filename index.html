@@ -16,18 +16,22 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: #1e1e2e;
+            background: url('URL_DE_LA_IMAGEN_DE_FONDO') no-repeat center center/cover;
             color: white;
             padding: 20px;
             text-align: center;
         }
         .container {
-            background: #282a36;
+            background: rgba(40, 42, 54, 0.9);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
             width: 100%;
             max-width: 400px;
+        }
+        .logo {
+            width: 100px;
+            margin-bottom: 10px;
         }
         h2 {
             margin-bottom: 10px;
@@ -82,84 +86,6 @@
 <body>
 
     <div class="container">
+        <img src="URL_DEL_LOGO" alt="Logotipo" class="logo">
         <h2>Generador de Contraseñas</h2>
-        <div class="password-container">
-            <span id="password">Haz clic en "Generar"</span>
-            <button class="copy-btn" onclick="copyPassword()">Copiar</button>
-        </div>
-        
-        <div class="controls">
-            <label for="length">Longitud: <span id="length-value">12</span></label>
-            <input type="range" id="length" min="6" max="32" value="12" oninput="updateLength()">
-            
-            <label>
-                <input type="checkbox" id="uppercase" checked> Incluir Mayúsculas
-            </label>
-            <label>
-                <input type="checkbox" id="numbers" checked> Incluir Números
-            </label>
-            <label>
-                <input type="checkbox" id="symbols" checked> Incluir Símbolos
-            </label>
-            
-            <button class="generate-btn" onclick="generatePassword()">Generar Contraseña</button>
-        </div>
-
-        <div class="strength" id="strength">Seguridad: N/A</div>
-    </div>
-
-    <script>
-        function generatePassword() {
-            const length = document.getElementById('length').value;
-            const useUppercase = document.getElementById('uppercase').checked;
-            const useNumbers = document.getElementById('numbers').checked;
-            const useSymbols = document.getElementById('symbols').checked;
-
-            const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
-            const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            const numberChars = "0123456789";
-            const symbolChars = "!@#$%^&*()_+[]{}|;:,.<>?";
-
-            let allChars = lowercaseChars;
-            if (useUppercase) allChars += uppercaseChars;
-            if (useNumbers) allChars += numberChars;
-            if (useSymbols) allChars += symbolChars;
-
-            let password = "";
-            for (let i = 0; i < length; i++) {
-                const randomIndex = Math.floor(Math.random() * allChars.length);
-                password += allChars[randomIndex];
-            }
-
-            document.getElementById('password').textContent = password;
-            checkStrength(password);
-        }
-
-        function copyPassword() {
-            const passwordText = document.getElementById('password').textContent;
-            navigator.clipboard.writeText(passwordText).then(() => {
-                alert("Contraseña copiada al portapapeles");
-            });
-        }
-
-        function updateLength() {
-            document.getElementById('length-value').textContent = document.getElementById('length').value;
-        }
-
-        function checkStrength(password) {
-            let strengthText = "Débil";
-            const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/;
-            const mediumRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
-
-            if (strongRegex.test(password)) {
-                strengthText = "Fuerte";
-            } else if (mediumRegex.test(password)) {
-                strengthText = "Media";
-            }
-
-            document.getElementById('strength').textContent = "Seguridad: " + strengthText;
-        }
-    </script>
-
-</body>
-</html>
+        <div class
